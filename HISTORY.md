@@ -2,12 +2,16 @@ Changelog
 =========
 
 
-0.1.2 (2021-08-14)
-------------------
-- Fix release, README and windows CI. [Bruno Rocha]
-- Release: version 0.1.0. [Bruno Rocha]
+(unreleased)
+------------
+- Remove tests for win. [chao.bi]
+- Fix build errors. [chao.bi]
+- Add mysql_db_profiler. [chao.bi]
+- Merge branch 'main' of https://github.com/hgbink/spark-jdbc-profiler.
+  [chao.bi]
+- Update README.md. [Chao Bi]
+- Remove sponsor button. [chao.bi]
+- ✅ Ready to clone and code. [hgbink]
+- Initial commit. [Chao Bi]
 
 
-0.1.0 (2021-08-14)
-------------------
-- Add release command. [Bruno Rocha]
