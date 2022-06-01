@@ -1,4 +1,3 @@
-
 def profile_whole_db(spark, jdbc_url, connnection_properties):
     """
     Profile the whole database.
@@ -11,18 +10,22 @@ def profile_whole_db(spark, jdbc_url, connnection_properties):
     """
     query = _get_query()
 
-    jdbcDF = (spark.read
-                .jdbc(
-                    jdbc_url,
-                    query,
-                    properties=connnection_properties))
+    jdbcDF = (spark.read.jdbc(
+        jdbc_url,
+        query,
+        properties=connnection_properties))
     return jdbcDF
+
 
 def _get_query():
     query = '''(
                      SELECT a.TABLE_NAME,
                              a.TABLE_ROWS,
-                            ROUND((a.DATA_LENGTH + a.INDEX_LENGTH) / 1024 / 1024) AS `Size (MB)`,
+                            ROUND(
+                                 (a.DATA_LENGTH + a.INDEX_LENGTH)
+                                  / 1024 / 1024
+                                ) 
+                            AS `Size (MB)`,
                             b.COLUMN_NAME as `Primary Col`,
                             d.`Unique_Key`,
                             c.`Foreign_Key`
@@ -61,5 +64,5 @@ def _get_query():
                       a.TABLE_TYPE= 'BASE TABLE'
                      order by DATA_LENGTH + INDEX_LENGTH desc
                     ) a'''
-                    
+
     return query
