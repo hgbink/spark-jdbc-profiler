@@ -40,7 +40,7 @@ See also
 - ✅ Code linting using [flake8](https://flake8.pycqa.org/en/latest/)
 - 📊 Code coverage reports using [codecov](https://about.codecov.io/sign-up/)
 - 🛳️ Automatic release to [PyPI](https://pypi.org) using [twine](https://twine.readthedocs.io/en/latest/) and github actions.
-- 🎯 Entry points to execute your program using `python -m <project_name>` or `$ project_name` with basic CLI argument parsing.
+- 🎯 Entry points to execute your program using `python -m <spark_jdbc_profiler>` or `$ spark_jdbc_profiler` with basic CLI argument parsing.
 - 🔄 Continuous integration using [Github Actions](.github/workflows/) with jobs to lint, test and release your project on Linux, Mac and Windows environments.
 
 > Curious about architectural decisions on this template? read [ABOUT_THIS_TEMPLATE.md](ABOUT_THIS_TEMPLATE.md)  
@@ -51,33 +51,33 @@ See also
 <!--  DELETE THE LINES ABOVE THIS AND WRITE YOUR PROJECT README BELOW -->
 
 ---
-# project_name
+# spark_jdbc_profiler
 
-[![codecov](https://codecov.io/gh/author_name/project_urlname/branch/main/graph/badge.svg?token=project_urlname_token_here)](https://codecov.io/gh/author_name/project_urlname)
-[![CI](https://github.com/author_name/project_urlname/actions/workflows/main.yml/badge.svg)](https://github.com/author_name/project_urlname/actions/workflows/main.yml)
+[![codecov](https://codecov.io/gh/hgbink/spark-jdbc-profiler/branch/main/graph/badge.svg?token=spark-jdbc-profiler_token_here)](https://codecov.io/gh/hgbink/spark-jdbc-profiler)
+[![CI](https://github.com/hgbink/spark-jdbc-profiler/actions/workflows/main.yml/badge.svg)](https://github.com/hgbink/spark-jdbc-profiler/actions/workflows/main.yml)
 
-project_description
+Awesome spark_jdbc_profiler created by hgbink
 
 ## Install it from PyPI
 
 ```bash
-pip install project_name
+pip install spark_jdbc_profiler
 ```
 
 ## Usage
 
 ```py
-from project_name import BaseClass
-from project_name import base_function
+from spark_jdbc_profiler import BaseClass
+from spark_jdbc_profiler import base_function
 
 BaseClass().base_method()
 base_function()
 ```
 
 ```bash
-$ python -m project_name
+$ python -m spark_jdbc_profiler
 #or
-$ project_name
+$ spark_jdbc_profiler
 ```
 
 ## Development

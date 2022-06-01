@@ -1,5 +1,5 @@
-from project_name.base import NAME
+from spark_jdbc_profiler.base import NAME
 
 
 def test_base():
-    assert NAME == "project_name"
+    assert NAME == "spark_jdbc_profiler"
