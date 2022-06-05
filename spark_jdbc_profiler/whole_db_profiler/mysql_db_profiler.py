@@ -19,26 +19,24 @@ def profile_whole_db(spark, jdbc_url, connnection_properties):
 
 def _get_query():
     query = '''(
-                     SELECT a.TABLE_NAME,
+                      SELECT a.TABLE_NAME,
                              a.TABLE_ROWS,
-                            ROUND(
-                                 (a.DATA_LENGTH + a.INDEX_LENGTH)
-                                  / 1024 / 1024
-                                ) 
-                            AS `Size (MB)`,
-                            b.COLUMN_NAME as `Primary Col`,
+                            ROUND((a.DATA_LENGTH + a.INDEX_LENGTH) / 1024 / 1024) AS `Size (MB)`,
+                            b.`Primary_Key`,
                             d.`Unique_Key`,
                             c.`Foreign_Key`
                      FROM 
                            information_schema.tables a
                      LEFT JOIN
                        (
-                          SELECT 
-                            TABLE_NAME, COLUMN_NAME
+                          SELECT TABLE_NAME,
+                          GROUP_CONCAT(COLUMN_NAME ) as `Primary_Key`
                           FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
                           where CONSTRAINT_NAME = 'PRIMARY'
+                          GROUP BY TABLE_NAME
                        ) b
                        ON a.TABLE_NAME = b.TABLE_NAME
+                       
                      LEFT JOIN
                        (
                            SELECT TABLE_NAME,
@@ -50,6 +48,7 @@ def _get_query():
                           GROUP BY TABLE_NAME
                        ) c
                        ON a.TABLE_NAME = c.TABLE_NAME   
+                       
                      LEFT JOIN
                        (
                           SELECT TABLE_NAME,
@@ -60,6 +59,8 @@ def _get_query():
                           GROUP BY TABLE_NAME
                        ) d
                        ON a.TABLE_NAME = d.TABLE_NAME  
+                       
+                       
                      WHERE
                       a.TABLE_TYPE= 'BASE TABLE'
                      order by DATA_LENGTH + INDEX_LENGTH desc
