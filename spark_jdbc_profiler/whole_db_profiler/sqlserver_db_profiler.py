@@ -19,7 +19,6 @@ def profile_whole_db(spark, jdbc_url, connnection_properties):
 
 def _get_query():
     query = '''(
-                                     
                 select a.TableName, a.TABLE_ROWS, b.SizeMB, c.Primary_Key, d.Foreign_Key
                 from
                   (SELECT TBL.object_id, TBL.name as TableName, SUM(PART.rows) AS TABLE_ROWS
@@ -48,7 +47,6 @@ def _get_query():
                            AND s.index_id = i.index_id
                        GROUP BY t.name
                      ) cte 
-                   
                    ) b
                  ON a.TableName = b.TableName
                 LEFT JOIN
@@ -60,10 +58,8 @@ def _get_query():
                           GROUP BY TABLE_NAME
                        ) c
                        ON a.TableName = c.TABLE_NAME
-                
                      LEFT JOIN
                        (
-                
                           SELECT TABLE_NAME,
                           STRING_AGG(COLUMN_NAME, ',') AS Foreign_Key
                           FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
@@ -71,8 +67,6 @@ def _get_query():
                           GROUP BY TABLE_NAME
                        ) d
                        ON a.TableName = d.TABLE_NAME   
-                
-
                     ) a'''
 
     return query
