@@ -32,7 +32,7 @@ fmt:              ## Format code using black & isort.
 
 .PHONY: lint
 lint:             ## Run pep8, black, mypy linters.
-	$(ENV_PREFIX)flake8 --ignore=W291,E126,E501 spark_jdbc_profiler/
+	$(ENV_PREFIX)flake8 --ignore=W291,E126,E501,E226 spark_jdbc_profiler/
 	$(ENV_PREFIX)mypy --ignore-missing-imports spark_jdbc_profiler/
 
 .PHONY: test

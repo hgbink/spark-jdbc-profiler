@@ -1,14 +1,18 @@
 from pyspark.sql import SparkSession
 
 
-def get_bounds(spark: SparkSession, table_name, user, password, jdbc_url):
+def get_bounds(spark: SparkSession, jdbc_url, connnection_properties, table_name, num_of_partitions):
     sql = f'(select min(id) as min, max(id) as max,count(id) as count from {table_name}) as bounds'
+
     bounds = spark.read.jdbc(
         url=jdbc_url,
         table=sql,
-        properties={"user": user, "password": password}
+        properties=connnection_properties
     ).collect()[0]
-    return bounds
+
+    length = ((bounds.max - bounds.min)//num_of_partitions)
+
+    return [{"min": bounds.min + length*i, "max": bounds.min + length*(i+1)} for i in range(num_of_partitions)]
 
 
 def get_predicate_sql(key_col, table_name, lower_bound, upper_bound):
